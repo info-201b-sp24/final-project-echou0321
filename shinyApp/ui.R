@@ -28,12 +28,16 @@ shinyUI(fluidPage(
     p("Ethical Considerations:"),
     p("When working with sensitive data related to mental health, it's essential to consider ethical questions and limitations. Confidentiality is vital, as the data includes sensitive personal information that could harm individuals if improperly disclosed. Strict measures should be taken to anonymize and secure the data, ensuring individuals' identities remain protected. Additionally, care must be taken not to inadvertently reinforce stigmas surrounding mental health."),
     
-    # Additional "flare" - you can add images, logos, etc. here
-    img(src = "TechMind.png", width = 400),
     
     # Data source link
     p("Data Source: ",
-      a("Open Sourcing Mental Illness (OSMI)", href = "https://osmihelp.org/")
-    )
+      a("Kaggle - Mental Health in Tech Survey", href = "https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey/data")
+    ),
+    p("Open Sourcing Mental Illness (OSMI):",
+      a("OSMI Website", href = "https://osmihelp.org/")
+    ),
+    
+    # Insert image
+    img(src='TechMind.png', height="50%", width="50%", align = "center")
   )
 ))
