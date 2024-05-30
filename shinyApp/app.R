@@ -2,6 +2,7 @@
 library(shiny)
 library(ggplot2)
 library(dplyr)
+library(shinythemes)
 
 # Load the data from GitHub
 data <- read.csv("https://raw.githubusercontent.com/info-201b-sp24/final-project-echou0321/main/shinyApp/cleaned_survey.csv")
@@ -13,6 +14,7 @@ consequence_labels <- c("No consequences" = "No",
 
 # Define UI
 ui <- fluidPage(
+  theme = shinytheme("darkly"),
   titlePanel("TechMind: Insights on Mental Health in Tech"),
   
   # Define tabs
@@ -58,7 +60,10 @@ ui <- fluidPage(
                  checkboxInput("show_all_remote", "Show All Remote Work Options", value = TRUE)
                ),
                mainPanel(
-                 plotOutput("remoteInterferencePlot")
+                 plotOutput("remoteInterferencePlot"),
+                 p("This chart describes the relationship between mental health interference frequency with remote/no remote work option. In the first drop-down menu, you can select the frequency. For example, if you select “sometimes”, then you can see that there are more observations where there are sometimes mental health interferences with non-remote jobs as opposed to remote jobs. You can mix and match both settings to show even more correlations. 
+This chart is designed to show that yes, there is a strong correlation between having a remote working option and less frequent mental health interferences with work.
+")
                )
              )
     ),
@@ -71,7 +76,9 @@ ui <- fluidPage(
                  checkboxInput("show_all", "Show All Data", value = TRUE)
                ),
                mainPanel(
-                 plotOutput("stigmaPlot")
+                 plotOutput("stigmaPlot"),
+                 p("This chart describes the relationship between perceptions of stigma around mental health and workers’ willingness to talk with supervisors. In the drop-down menu, you can select 3 options: No consequences, Maybe consequences, and Yes consequences. For example, if you select Yes consequences, you can see that a majority of workers do not want to discuss mental health topics with their supervisors, showing that company culture and not addressing stigma can lead to a lack of communication."
+)
                )
              )
     ),
@@ -84,7 +91,8 @@ ui <- fluidPage(
                  checkboxInput("show_all", "Show All Data", value = TRUE)
                ),
                mainPanel(
-                 plotOutput("wellnessPlot")
+                 plotOutput("wellnessPlot"),
+                 p("This chart describes the relationship between perception of employer mental health support with the existence of a wellness program. In the drop-down menu, you can select between Yes, Don’t Know, and No. For example if you select No, you can see that most employees that said so do not have wellness programs. Additionally even if you select Yes, there is still a large group of people who either don’t know if they have a wellness program or just don’t have one at all.")
                )
              )
     ),
