@@ -1,30 +1,94 @@
+#
+# This is the user-interface definition of a Shiny web application. You can
+# run the application by clicking 'Run App' above.
+#
+# Find out more about building applications with Shiny here:
+#
+#    http://shiny.rstudio.com/
+#
+
 library(shiny)
 
-ui <- fluidPage(
-  titlePanel("TechMind: Insights on Mental Health in Tech"),
-  
-  sidebarLayout(
-    sidebarPanel(
-      # Sidebar content can go here
-    ),
+# Define UI for application that draws a histogram
+shinyUI(fluidPage(
+
+    # Application title
+    navbarPage( "Drug Misuse and Mental Health",
+        tabPanel(
+            "Introduction",
+                mainPanel(
+                   uiOutput("introduction"),
+                   imageOutput("coverImage")
+            )
+        ),
+        
+        tabPanel(# Sidebar with a slider input for number of bins
+            "Drug Use Prevalance by State",
+            sidebarLayout(
+                sidebarPanel(
+                   uiOutput("category"),
+                   uiOutput("year"),
+                   uiOutput("agegrp")
+                ),
+                
+                # Show a plot of the generated distribution
+                mainPanel(
+                    plotOutput("distPlot"),
+                    uiOutput("summary1")
+                )
+            )
+        ),
+        tabPanel("Drug Use Rate Over Time by Age Group",
+                 sidebarLayout(
+                     sidebarPanel(
+                         uiOutput("category2"),
+                         uiOutput("agegrp2")
+                     ),
+                     mainPanel(
+                         plotOutput("linePlot"),
+                         uiOutput("summary2")
+                     )
+                 )),
+        tabPanel("Age When First Use of Drug",
+                 sidebarLayout(
+                     sidebarPanel(
+                         uiOutput("substance"),
+                         uiOutput("year2")
+                     ),
+                     
+                     # Show a plot of the generated distribution
+                     mainPanel(
+                         plotOutput("barPlot"),
+                         uiOutput("summary3")
+                     )
+                 )),
+        tabPanel(
+            "Conclusion",
+            mainPanel(
+                h3("Notable Insight One"),
+                uiOutput("notableinsightone"),
+                h5("Cocaine"),
+                imageOutput("cocaine"),
+                h5("LSD"),
+                imageOutput("lsd"),
+                h5("Heroin"),
+                imageOutput("heroin"),
+                h5("Hallucinogins"),
+                imageOutput("hallucinogin"),
+                h3("Notable Insight Two"),
+                uiOutput("notableinsighttwo"),
+                h5("Cocaine Use in the Past Year"),
+                imageOutput("graphImage1"),
+                h5("Recieved Mental Health Services"),
+                imageOutput("graphImage2"),
+                h3("Broader Implications and Quality of Data"),
+                uiOutput("broaderandquality")
+                
+            
+            )
+        )
     
-    mainPanel(
-      h2("Project Overview"),
-      p("Our project investigates mental health in the tech workplace, analyzing the impact of remote work, access to mental health benefits, stigma, and wellness programs."),
-      h3("Major Research Questions"),
-      tags$ul(
-        tags$li("Does working remotely correlate with lower levels of reported mental health interference at work?"),
-        tags$li("What proportion of tech employees have access to employer-provided mental health benefits, and how does this correlate with seeking treatment?"),
-        tags$li("How do perceptions of stigma associated with mental health in the workplace affect employees’ willingness to discuss mental health issues with supervisors or coworkers?"),
-        tags$li("Does the existence of a wellness program correlate with better employee perceptions of employer support for mental health issues?")
-      ),
-      h3("Data Source"),
-      p("The dataset used in this project is sourced from Open Sourcing Mental Illness (OSMI). You can find the data on Kaggle:"),
-      a(href = "https://www.kaggle.com/osmi/mental-health-in-tech-survey", "Mental Health in Tech Survey"),
-      h3("Ethical Considerations"),
-      p("When working with this data, we must consider the confidentiality of respondents' personal information. It's crucial to anonymize the data to protect individuals' identities. Additionally, the data may not fully represent the diversity of the tech industry, and we must be cautious about overgeneralizing findings."),
-      # Including an image for visual appeal
-      img(src = "https://example.com/mental_health_image.jpg", height = "300px")
+
+    
     )
-  )
-)
+))
