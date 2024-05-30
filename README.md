@@ -1,4 +1,4 @@
-# Title of Your Final Project Here 
+# TechMind: Insights on Mental Health in Tech
 ## INFO 201 "Foundational Skills for Data Science"
 
 Authors: Yoonseo Nam & Eric Chou
