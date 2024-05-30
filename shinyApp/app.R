@@ -1,5 +1,7 @@
 # Load necessary libraries
 library(shiny)
+library(ggplot2)
+library(dplyr)
 
 # Define UI
 ui <- fluidPage(
@@ -17,7 +19,6 @@ ui <- fluidPage(
              p("The dataset used in this project was obtained from the Open Sourcing Mental Illness (OSMI), a non-profit organization dedicated to promoting mental wellness within the tech and open-source communities. The data was collected from a survey conducted in 2014, which investigated the frequency of mental health issues and attitudes towards mental well-being among tech workers."),
              p("Ethical Considerations:"),
              p("When working with sensitive data related to mental health, it's essential to consider ethical questions and limitations. Confidentiality is vital, as the data includes sensitive personal information that could harm individuals if improperly disclosed. Strict measures should be taken to anonymize and secure the data, ensuring individuals' identities remain protected. Additionally, care must be taken not to inadvertently reinforce stigmas surrounding mental health."),
-             
              
              # Data source link
              p("Data Source: ",
@@ -46,19 +47,26 @@ ui <- fluidPage(
                )
              )
     )
-    
-    # Add more tabPanel() for additional pages if needed...
   )
 )
 
 # Define server logic
 server <- function(input, output, session) {
-
-  # Server logic for the introduction page
-  
-  # Server logic for the work interference page
-  source("page1_work_interference.R")
+  output$interferencePlot <- renderPlot({
+    plot_data <- cleaned_survey %>%
+      filter(if(input$show_all) TRUE else work_interfere == input$work_interfere)
+    
+    ggplot(plot_data, aes(x = work_interfere, fill = work_interfere)) +
+      geom_bar() +
+      labs(
+        title = "Mental Health Interference at Work",
+        x = "Mental Health Interference",
+        y = "Count",
+        fill = "Interference Level"
+      ) +
+      theme_minimal()
+  })
 }
 
-# Run Shiny App
+# Run the application 
 shinyApp(ui = ui, server = server)
