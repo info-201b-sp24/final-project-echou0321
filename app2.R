@@ -4,7 +4,7 @@ library(ggplot2)
 library(dplyr)
 
 # Load the data from GitHub
-data <- read.csv("https://raw.githubusercontent.com/info-201b-sp24/final-project-echou0321/main/cleaned_survey.csv")
+data <- read.csv("https://raw.githubusercontent.com/info-201b-sp24/final-project-echou0321/main/shinyApp/cleaned_survey.csv")
 
 # Mapping for dropdown menu
 consequence_labels <- c("No consequences" = "No", 
